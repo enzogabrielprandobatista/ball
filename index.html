@@ -46,9 +46,6 @@
     const gyroImg = new Image();
     gyroImg.src = 'gyro.png';
 
-    // ── STAGE 3 BG IMAGE ─────────────────────────────────────────────────────────
-    const stage3Bg = new Image();
-    stage3Bg.src = 'download.jfif';
 
     // ── INPUT ──────────────────────────────────────────────────────────────────
     const keys = {}, jp = {};
@@ -455,43 +452,11 @@
     function drawBg(si) {
       const s = STAGES[si];
 
-      if (si === 2 && stage3Bg.complete && stage3Bg.naturalWidth > 0) {
-        cx.drawImage(stage3Bg, 0, 0, W, H);
-        // chão — base areia
-        cx.fillStyle = '#C8A060'; cx.fillRect(0, GY, W, H - GY);
-        // gradiente de profundidade
-        const sandGr = cx.createLinearGradient(0, GY, 0, H);
-        sandGr.addColorStop(0, '#D4B070');
-        sandGr.addColorStop(1, '#A07840');
-        cx.fillStyle = sandGr; cx.fillRect(0, GY, W, H - GY);
-        // ondulações de areia (linhas horizontais)
-        for (let row = 0; row < 6; row++) {
-          const ry = GY + 6 + row * 7;
-          cx.strokeStyle = `rgba(255,220,140,${0.18 - row * 0.02})`;
-          cx.lineWidth = 1.5;
-          cx.beginPath();
-          for (let x = 0; x < W; x += 8) {
-            const wave = Math.sin((x + camX * 0.4 + row * 31) * 0.04) * 2;
-            x === 0 ? cx.moveTo(x, ry + wave) : cx.lineTo(x, ry + wave);
-          }
-          cx.stroke();
-        }
-        // grãozinhos de areia (pontos aleatórios seeded por camX)
-        cx.fillStyle = 'rgba(200,160,80,0.35)';
-        for (let i = 0; i < 60; i++) {
-          const gx = ((i * 137 + Math.floor(camX * 0.1) * 71) % W);
-          const gy2 = GY + 2 + (i * 53) % (H - GY - 4);
-          cx.fillRect(gx, gy2, 2, 1);
-        }
-        // borda superior da areia
-        cx.fillStyle = '#E8C880'; cx.fillRect(0, GY, W, 3);
-      } else {
-        const gr = cx.createLinearGradient(0, 0, 0, GY);
-        gr.addColorStop(0, s.sky); gr.addColorStop(1, s.dust);
-        cx.fillStyle = gr; cx.fillRect(0, 0, W, GY);
-        cx.fillStyle = s.gnd; cx.fillRect(0, GY, W, H - GY);
-        cx.fillStyle = 'rgba(255,255,255,0.15)'; cx.fillRect(0, GY, W, 3);
-      }
+      const gr = cx.createLinearGradient(0, 0, 0, GY);
+      gr.addColorStop(0, s.sky); gr.addColorStop(1, s.dust);
+      cx.fillStyle = gr; cx.fillRect(0, 0, W, GY);
+      cx.fillStyle = s.gnd; cx.fillRect(0, GY, W, H - GY);
+      cx.fillStyle = 'rgba(255,255,255,0.15)'; cx.fillRect(0, GY, W, 3);
 
       // Clouds
       bgEls.filter(e => e.type === 'cloud').forEach(e => {
