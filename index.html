@@ -484,7 +484,7 @@
       }
 
       // Clouds
-      bgEls.filter(e => e.type === 'cloud').forEach(e => {
+      bgEls.filter(e => e.type === 'cloud' && si !== 2).forEach(e => {
         const sx = e.x - camX;
         if (sx < -100 || sx > W + 100) return;
         cx.fillStyle = 'rgba(255,255,255,0.72)';
@@ -498,6 +498,7 @@
         const sx = e.x - camX;
         if (sx < -80 || sx > W + 80) return;
         const t = e.type;
+        if (si === 2 && (t === 'cactus' || t !== 'rock')) return; // etapa 3: só pedras
         if (t === 'cactus') {
           cx.fillStyle = '#4A8A18'; cx.fillRect(sx - 4, GY - e.sz, 8, e.sz);
           cx.fillRect(sx - 16, GY - e.sz * 0.6, 12, 7); cx.fillRect(sx + 8, GY - e.sz * 0.5, 12, 7);
