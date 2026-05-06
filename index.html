@@ -2125,20 +2125,19 @@
 
     // ── CANVAS RESPONSIVO ──────────────────────────────────────────────────────
     function resizeCanvas() {
-      const gamepad = document.getElementById('gamepad');
-      const padH = gamepad.offsetHeight || 0;
-      const availW = window.innerWidth;
-      const availH = window.innerHeight - padH - 20;
-      const scale = Math.min(availW / 800, availH / 450);
-      const dispW = Math.floor(800 * scale);
-      const dispH = Math.floor(450 * scale);
-      cv.style.width  = dispW + 'px';
-      cv.style.height = dispH + 'px';
-      gamepad.style.width = dispW + 'px';
+      const isMobile = window.matchMedia('(pointer: coarse)').matches;
+      const gamepad   = document.getElementById('gamepad');
+      const padH      = isMobile ? (gamepad.offsetHeight || 160) : 0;
+      const barH      = isMobile ? 0 : 28;           // instrução teclado
+      const availW    = window.innerWidth;
+      const availH    = window.innerHeight - padH - barH - 4;
+      const scale     = Math.min(availW / 800, availH / 450);
+      cv.style.width  = Math.floor(800 * scale) + 'px';
+      cv.style.height = Math.floor(450 * scale) + 'px';
     }
     window.addEventListener('resize', resizeCanvas);
-    // Aguarda o layout renderizar para calcular a altura do gamepad corretamente
-    requestAnimationFrame(resizeCanvas);
+    // Duplo rAF garante que o gamepad já tem altura calculada pelo CSS
+    requestAnimationFrame(() => requestAnimationFrame(resizeCanvas));
 
     // ── CONTROLES DE TOQUE ─────────────────────────────────────────────────────
     document.querySelectorAll('.gb-btn').forEach(btn => {

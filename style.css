@@ -6,14 +6,13 @@
 
 body {
   background: #0d0500 !important;
-  gap: 6px;
   user-select: none;
   touch-action: none;
 }
 
 canvas {
   max-width: 100%;
-  height: auto;
+  display: block;
 }
 
 #dpad {
@@ -22,13 +21,13 @@ canvas {
     ". up ."
     "lt .  rt"
     ". dn .";
-  gap: 6px;
+  gap: 5px;
 }
 
 #abtns {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 .gb-btn {
@@ -38,7 +37,7 @@ canvas {
   border: 2px solid #B8860B;
   border-radius: 12px;
   color: #FFD700;
-  font-size: 24px;
+  font-size: 22px;
   font-family: Georgia, serif;
   display: flex;
   align-items: center;
@@ -54,14 +53,44 @@ canvas {
   transform: scale(0.93);
 }
 
-/* posições no grid do dpad */
 [data-key="ArrowUp"]    { grid-area: up; }
 [data-key="ArrowLeft"]  { grid-area: lt; }
 [data-key="ArrowRight"] { grid-area: rt; }
 [data-key="ArrowDown"]  { grid-area: dn; }
 
-/* telas touch: mostra gamepad, esconde instruções de teclado */
+/* ── MOBILE ─────────────────────────────────────── */
 @media (pointer: coarse) {
-  #gamepad { display: flex !important; }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 0 !important;
+  }
+
   #controls { display: none !important; }
+
+  #gamepad {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.6);
+    flex-shrink: 0;
+  }
+
+  .gb-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 18px;
+    border-radius: 10px;
+  }
+
+  #dpad { gap: 4px; }
+  #abtns { gap: 5px; grid-template-columns: repeat(3, 52px); }
 }
