@@ -45,7 +45,7 @@ Na tela touch aparece um gamepad virtual com D-Pad e botões de ação.
 
 ```
 Ball/
-├── steel ball race.html   # jogo principal
+├── index.html             # jogo principal
 ├── style.css              # estilos da página
 ├── GohI0_IXQAAQuej.png    # logo do jogo
 ├── imagens.jfif           # imagem da tela final
@@ -54,4 +54,4 @@ Ball/
 
 ## Jogar online
 
-Acesse: [lustrous-cupcake-ec150c.netlify.app](http://lustrous-cupcake-ec150c.netlify.app)
+Acesse: [enzogabrielprandobatista.github.io/ball](https://enzogabrielprandobatista.github.io/ball/)
