@@ -470,7 +470,7 @@
         cx.fillStyle = '#E8C880'; cx.fillRect(0, GY, W, 3);
         for (let row = 0; row < 6; row++) {
           const ry = GY + 6 + row * 7;
-          cx.strokeStyle = gba(255,220,140,);
+          cx.strokeStyle = 'rgba(255,220,140,' + (0.18 - row * 0.02) + ')';
           cx.lineWidth = 1.5; cx.beginPath();
           for (let x = 0; x < W; x += 8) {
             const wave = Math.sin((x + camX * 0.4 + row * 31) * 0.04) * 2;
