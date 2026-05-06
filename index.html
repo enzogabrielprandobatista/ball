@@ -2125,13 +2125,34 @@
 
     // ── CANVAS RESPONSIVO ──────────────────────────────────────────────────────
     function resizeCanvas() {
-      const isMobile = window.matchMedia('(pointer: coarse)').matches;
-      const gamepad   = document.getElementById('gamepad');
-      const padH      = isMobile ? (gamepad.offsetHeight || 160) : 0;
-      const barH      = isMobile ? 0 : 28;           // instrução teclado
-      const availW    = window.innerWidth;
-      const availH    = window.innerHeight - padH - barH - 4;
-      const scale     = Math.min(availW / 800, availH / 450);
+      const isMobile   = window.matchMedia('(pointer: coarse)').matches;
+      const isLandscape = window.innerWidth > window.innerHeight;
+      const gamepad    = document.getElementById('gamepad');
+
+      let padW = 0, padH = 0;
+      if (isMobile && isLandscape) {
+        // Paisagem: gamepad fica à direita do canvas
+        padW = gamepad.offsetWidth || 180;
+        padH = 0;
+        gamepad.style.flexDirection = 'column';
+        gamepad.style.height        = '100vh';
+        gamepad.style.width         = '180px';
+        gamepad.style.position      = 'fixed';
+        gamepad.style.right         = '0';
+        gamepad.style.top           = '0';
+        gamepad.style.justifyContent = 'space-evenly';
+      } else if (isMobile) {
+        // Retrato: gamepad embaixo
+        padH = gamepad.offsetHeight || 160;
+        gamepad.style.cssText = '';   // limpa estilos inline
+      } else {
+        gamepad.style.cssText = '';
+      }
+
+      const barH   = isMobile ? 0 : 28;
+      const availW = window.innerWidth  - padW;
+      const availH = window.innerHeight - padH - barH - 4;
+      const scale  = Math.min(availW / 800, availH / 450);
       cv.style.width  = Math.floor(800 * scale) + 'px';
       cv.style.height = Math.floor(450 * scale) + 'px';
     }
