@@ -1963,8 +1963,10 @@
       cx.fillStyle = '#FFF'; cx.font = '18px Georgia';
       cx.fillText(`Pontuação Final: ${score}`, W / 2, 330);
 
-      const pulse2 = Math.sin(frame * 0.05) * 0.4 + 0.6;
-      cx.fillStyle = `rgba(255,255,255,${pulse2})`; cx.font = 'bold 28px Georgia';
+      cx.fillStyle = 'rgba(0,0,0,0.6)';
+      cx.fillRect(W / 2 - 200, 355, 400, 50);
+      const pulse2 = Math.sin(frame * 0.05) * 0.3 + 0.7;
+      cx.fillStyle = `rgba(255,215,0,${pulse2})`; cx.font = 'bold 30px Georgia';
       cx.fillText('Obrigado por jogar!', W / 2, 390);
 
       const pulse = Math.sin(frame * 0.07) * 0.3 + 0.7;
