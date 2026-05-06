@@ -9,14 +9,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-dark d-flex flex-column align-items-center justify-content-center min-vh-100 overflow-hidden p-0">
-  <canvas id="c" width="800" height="450" class="border border-warning d-block"></canvas>
+<body>
+  <canvas id="c" width="800" height="450"></canvas>
 
-  <div id="controls" class="text-warning font-monospace text-center px-2 mt-1" style="font-size:12px;letter-spacing:1px;">
-    ← → : Mover &nbsp;|&nbsp; ↑ / Z : Pular &nbsp;|&nbsp; ↓ : Cavalo &nbsp;|&nbsp; X : Atacar &nbsp;|&nbsp; C : Especial &nbsp;|&nbsp; P : Pausar &nbsp;|&nbsp; ENTER : Confirmar
+  <div id="controls">
+    ← → : Mover | ↑ / Z : Pular | ↓ : Cavalo | X : Atacar | C : Especial | P : Pausar | ENTER : Confirmar
   </div>
 
-  <div id="gamepad" class="w-100 d-none justify-content-between align-items-center px-3 py-2 flex-shrink-0" style="background:rgba(0,0,0,0.5);touch-action:none;">
+  <div id="gamepad">
     <div id="dpad">
       <div class="gb-btn" data-key="ArrowUp">▲</div>
       <div class="gb-btn" data-key="ArrowLeft">◄</div>
@@ -2125,21 +2125,22 @@
 
     // ── CANVAS RESPONSIVO ──────────────────────────────────────────────────────
     function resizeCanvas() {
+      const vw = window.visualViewport ? window.visualViewport.width  : window.innerWidth;
+      const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
       const isMobile    = window.matchMedia('(pointer: coarse)').matches;
-      const isLandscape = window.innerWidth > window.innerHeight;
-      const W = window.innerWidth, H = window.innerHeight;
+      const isLandscape = vw > vh;
 
       let availW, availH;
       if (isMobile && isLandscape) {
-        availW = W - 160;   // gamepad lateral 160px (definido no CSS)
-        availH = H;
+        availW = vw - 150;   // gamepad lateral 150px
+        availH = vh;
       } else if (isMobile) {
-        const gamepad = document.getElementById('gamepad');
-        availW = W;
-        availH = H - (gamepad.offsetHeight || 160);
+        const gp = document.getElementById('gamepad');
+        availW = vw;
+        availH = vh - (gp.offsetHeight || 0);
       } else {
-        availW = W;
-        availH = H - 28;
+        availW = vw;
+        availH = vh - 28;    // barra de controles desktop
       }
 
       const scale = Math.min(availW / 800, availH / 450);

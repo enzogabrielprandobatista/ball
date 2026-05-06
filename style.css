@@ -1,119 +1,115 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* ── BASE ─────────────────────────────────────────── */
 body {
-  background: #0d0500 !important;
+  background: #0d0500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
   user-select: none;
   touch-action: none;
 }
 
-canvas {
-  max-width: 100%;
-  display: block;
+canvas { display: block; border: 3px solid #B8860B; }
+
+#controls {
+  color: #B8860B;
+  font-family: Georgia, serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 4px 8px;
 }
 
+#gamepad { display: none; }
+
+/* ── BOTÕES ───────────────────────────────────────── */
 #dpad {
   display: grid;
-  grid-template-areas:
-    ". up ."
-    "lt .  rt"
-    ". dn .";
-  gap: 5px;
+  grid-template-areas: ". up ." "lt . rt" ". dn .";
+  gap: 4px;
 }
 
 #abtns {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
+  gap: 5px;
 }
 
 .gb-btn {
-  width: 64px;
-  height: 64px;
+  width: 56px; height: 56px;
   background: rgba(184,134,11,0.35);
   border: 2px solid #B8860B;
-  border-radius: 12px;
+  border-radius: 10px;
   color: #FFD700;
-  font-size: 22px;
+  font-size: 20px;
   font-family: Georgia, serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  touch-action: none;
+  user-select: none; touch-action: none;
 }
 
-.gb-btn.pressed {
-  background: rgba(184,134,11,0.85);
-  transform: scale(0.93);
-}
+.gb-btn.pressed { background: rgba(184,134,11,0.85); transform: scale(0.93); }
 
 [data-key="ArrowUp"]    { grid-area: up; }
 [data-key="ArrowLeft"]  { grid-area: lt; }
 [data-key="ArrowRight"] { grid-area: rt; }
 [data-key="ArrowDown"]  { grid-area: dn; }
 
-/* ── MOBILE RETRATO ──────────────────────────────── */
+/* ── MOBILE RETRATO ───────────────────────────────── */
 @media (pointer: coarse) and (orientation: portrait) {
-  html, body { height: 100%; overflow: hidden; }
-
   body {
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 0 !important;
+    justify-content: flex-start;
+    height: 100dvh;
   }
 
-  #controls { display: none !important; }
+  #controls { display: none; }
 
   #gamepad {
-    display: flex !important;
-    width: 100% !important;
+    display: flex;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 8px 12px;
-    background: rgba(0,0,0,0.6);
+    width: 100%;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.7);
     flex-shrink: 0;
   }
 
-  .gb-btn { width: 52px; height: 52px; font-size: 18px; border-radius: 10px; }
-  #dpad   { gap: 4px; }
-  #abtns  { gap: 5px; grid-template-columns: repeat(2, 52px); }
-}
-
-/* ── MOBILE PAISAGEM ─────────────────────────────── */
-@media (pointer: coarse) and (orientation: landscape) {
-  html, body { height: 100vh; overflow: hidden; }
-
-  body {
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-    align-items: stretch !important;
-    gap: 0 !important;
-  }
-
-  canvas { align-self: center; }
-
-  #controls { display: none !important; }
-
-  #gamepad {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-evenly !important;
-    align-items: center;
-    width: 160px !important;
-    height: 100vh;
-    flex-shrink: 0;
-    padding: 8px;
-    background: rgba(0,0,0,0.6);
-  }
-
-  .gb-btn { width: 48px; height: 48px; font-size: 16px; border-radius: 8px; }
+  .gb-btn { width: 48px; height: 48px; font-size: 17px; }
   #dpad   { gap: 3px; }
   #abtns  { gap: 4px; grid-template-columns: repeat(2, 48px); }
+}
+
+/* ── MOBILE PAISAGEM ──────────────────────────────── */
+@media (pointer: coarse) and (orientation: landscape) {
+  body {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100dvh;
+  }
+
+  #controls { display: none; }
+
+  #gamepad {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 150px;
+    height: 100dvh;
+    flex-shrink: 0;
+    padding: 8px 6px;
+    background: rgba(0,0,0,0.7);
+    order: 2;
+  }
+
+  .gb-btn { width: 46px; height: 46px; font-size: 16px; border-radius: 8px; }
+  #dpad   { gap: 3px; }
+  #abtns  { gap: 4px; grid-template-columns: repeat(2, 46px); }
 }
