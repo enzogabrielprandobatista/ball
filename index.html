@@ -85,7 +85,6 @@
     let frame = 0, score = 0, selectedChar = 0, currentStage = 0;
     let player, enemies, pProjs, eProjs, bProjs, particles, boss;
     let camX, raceProgress, stageLen, spawnCd, bossTriggered;
-    let corpses;
     let bossIntroTimer, stageClearTimer, bgEls;
 
 
@@ -166,19 +165,6 @@
       player.x = 120; player.y = GY - player.h;
       player.vx = 0; player.vy = 0; player.onGnd = true; player.invT = 0;
       bgEls = mkBgEls(si, stageLen);
-      // Partes do Cadáver Santo espalhadas pela etapa (6 partes por etapa)
-      corpses = [];
-      const corpseParts = ['Mão', 'Olho', 'Costela', 'Coração', 'Pulmão', 'Língua'];
-      for (let i = 0; i < 6; i++) {
-        corpses.push({
-          x: 800 + (stageLen * 0.85 / 6) * i + rInt(100, 400),
-          y: GY - 32,
-          w: 24, h: 32,
-          part: corpseParts[i],
-          collected: false,
-          bob: rInt(0, 60),
-        });
-      }
     }
 
     // ── SPAWN ENEMY ────────────────────────────────────────────────────────────
@@ -465,53 +451,6 @@
       particles = particles.filter(p => p.life > 0);
     }
 
-    function updCorpses() {
-      const p = player;
-      corpses.forEach(c => {
-        if (c.collected) return;
-        const sx = c.x - camX;
-        if (sx < -60 || sx > W + 60) return;
-        // collision with player
-        if (p.x < c.x + c.w && p.x + p.w > c.x && p.y < c.y + c.h && p.y + p.h > c.y) {
-          c.collected = true;
-          const heal = 60;
-          p.hp = Math.min(p.maxHp, p.hp + heal);
-          spark(sx, c.y, '#FFD700', 20, true);
-          spark(sx, c.y, '#FFFFFF', 10);
-          score += 150;
-        }
-      });
-    }
-
-    function drawCorpses() {
-      corpses.forEach(c => {
-        if (c.collected) return;
-        const sx = c.x - camX;
-        if (sx < -60 || sx > W + 60) return;
-        // pisca lentamente — visível mas sem chamar atenção
-        const pulse = Math.sin((frame + c.bob) * 0.04) * 0.25 + 0.55;
-        cx.save();
-        // sombra sutil no chão
-        cx.globalAlpha = pulse * 0.4;
-        cx.fillStyle = '#8B6800';
-        cx.beginPath();
-        cx.ellipse(sx + c.w / 2, c.y + c.h, 9, 3, 0, 0, Math.PI * 2);
-        cx.fill();
-        // corpo do item
-        cx.globalAlpha = pulse;
-        cx.fillStyle = '#C8A832';
-        cx.fillRect(sx + 6, c.y + 6, c.w - 12, c.h - 12);
-        // cruz
-        cx.fillStyle = '#5A3A00';
-        cx.fillRect(sx + c.w / 2 - 1, c.y + 8, 2, c.h - 16);
-        cx.fillRect(sx + 8, c.y + 13, c.w - 16, 2);
-        // borda fina
-        cx.strokeStyle = '#8B6800';
-        cx.lineWidth = 1;
-        cx.strokeRect(sx + 6, c.y + 6, c.w - 12, c.h - 12);
-        cx.restore();
-      });
-    }
 
     // ── DRAW FUNCTIONS ─────────────────────────────────────────────────────────
     function drawBg(si) {
@@ -2080,7 +2019,6 @@
       if (paused) {
         // Redesenha o frame congelado + overlay de pausa
         drawBg(currentStage);
-        drawCorpses();
         drawProjs();
         enemies.forEach(e => drawChar(e, '#8B2200', false));
         if (boss) drawBossEntity(boss);
@@ -2105,7 +2043,6 @@
         updPProjs();
         if (gs === GS.BOSS && boss) updBoss();
         updParticles();
-        updCorpses();
         bgEls.filter(e => e.type === 'cloud').forEach(e => { e.x -= e.spd; if (e.x < -100) e.x = stageLen + 100; });
 
         // Camera
@@ -2137,7 +2074,6 @@
 
         // Draw
         drawBg(currentStage);
-        drawCorpses();
         drawProjs();
         enemies.forEach(e => drawChar(e, '#8B2200', false));
         if (boss) drawBossEntity(boss);
