@@ -488,22 +488,27 @@
         if (c.collected) return;
         const sx = c.x - camX;
         if (sx < -60 || sx > W + 60) return;
-        // pisca suavemente, quase imperceptível no chão
-        const pulse = Math.sin((frame + c.bob) * 0.04) * 0.15 + 0.2;
+        // pisca lentamente — visível mas sem chamar atenção
+        const pulse = Math.sin((frame + c.bob) * 0.04) * 0.25 + 0.55;
         cx.save();
-        cx.globalAlpha = pulse;
-        // pequeno brilho dourado discreto no chão
-        cx.fillStyle = '#C8A800';
-        cx.beginPath();
-        cx.ellipse(sx + c.w / 2, c.y + c.h - 4, 8, 4, 0, 0, Math.PI * 2);
-        cx.fill();
-        // objeto pequeno e sem destaque
-        cx.globalAlpha = pulse + 0.1;
-        cx.fillStyle = '#D4B870';
-        cx.fillRect(sx + 7, c.y + 8, c.w - 14, c.h - 14);
+        // sombra sutil no chão
+        cx.globalAlpha = pulse * 0.4;
         cx.fillStyle = '#8B6800';
-        cx.fillRect(sx + c.w / 2 - 1, c.y + 10, 2, c.h - 18);
-        cx.fillRect(sx + 9, c.y + 15, c.w - 18, 2);
+        cx.beginPath();
+        cx.ellipse(sx + c.w / 2, c.y + c.h, 9, 3, 0, 0, Math.PI * 2);
+        cx.fill();
+        // corpo do item
+        cx.globalAlpha = pulse;
+        cx.fillStyle = '#C8A832';
+        cx.fillRect(sx + 6, c.y + 6, c.w - 12, c.h - 12);
+        // cruz
+        cx.fillStyle = '#5A3A00';
+        cx.fillRect(sx + c.w / 2 - 1, c.y + 8, 2, c.h - 16);
+        cx.fillRect(sx + 8, c.y + 13, c.w - 16, 2);
+        // borda fina
+        cx.strokeStyle = '#8B6800';
+        cx.lineWidth = 1;
+        cx.strokeRect(sx + 6, c.y + 6, c.w - 12, c.h - 12);
         cx.restore();
       });
     }
