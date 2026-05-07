@@ -2053,7 +2053,12 @@
         // Spawn
         if (gs === GS.PLAYING && !bossTriggered) {
           spawnCd--;
-          if (spawnCd <= 0) { spawnEnemy(); spawnCd = rInt(200, 340); }
+          if (spawnCd <= 0) {
+            spawnEnemy();
+            if (currentStage >= 2) { spawnEnemy(); }
+            if (currentStage >= 2 && Math.random() < 0.35) { spawnEnemy(); }
+            spawnCd = currentStage >= 2 ? rInt(80, 150) : rInt(200, 340);
+          }
         }
 
         // Boss trigger
