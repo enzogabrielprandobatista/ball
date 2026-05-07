@@ -149,6 +149,11 @@
       for (let i = 0; i < 35; i++) {
         els.push({ x: rand(200, len), y: GY - 2, type: ['cactus', 'rock', 'bush'][si], sz: rand(14, 38) });
       }
+      if (si === 2) {
+        for (let i = 0; i < 18; i++) {
+          els.push({ x: rand(200, len), y: GY - 2, type: 'cactus', sz: rand(18, 44) });
+        }
+      }
       for (let i = 0; i < 12; i++) {
         els.push({ x: rand(0, len), y: rand(25, 100), type: 'cloud', sz: rand(40, 75), spd: rand(0.08, 0.25) });
       }
@@ -499,9 +504,10 @@
         const sx = e.x - camX;
         if (sx < -80 || sx > W + 80) return;
         const t = e.type;
-        if (si === 2 && (t === 'cactus' || t !== 'rock')) return; // etapa 3: só pedras
+        if (si === 2 && t === 'bush') return; // etapa 3: sem arbustos verdes
         if (t === 'cactus') {
-          cx.fillStyle = '#4A8A18'; cx.fillRect(sx - 4, GY - e.sz, 8, e.sz);
+          cx.fillStyle = si === 2 ? '#3A7A28' : '#4A8A18';
+          cx.fillRect(sx - 4, GY - e.sz, 8, e.sz);
           cx.fillRect(sx - 16, GY - e.sz * 0.6, 12, 7); cx.fillRect(sx + 8, GY - e.sz * 0.5, 12, 7);
         } else if (t === 'rock') {
           cx.fillStyle = '#787878';
