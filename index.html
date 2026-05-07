@@ -488,35 +488,23 @@
         if (c.collected) return;
         const sx = c.x - camX;
         if (sx < -60 || sx > W + 60) return;
-        const bob = Math.sin((frame + c.bob) * 0.06) * 5;
-        const glow = Math.sin((frame + c.bob) * 0.08) * 0.4 + 0.6;
-        // aura dourada
+        // pisca suavemente, quase imperceptível no chão
+        const pulse = Math.sin((frame + c.bob) * 0.04) * 0.15 + 0.2;
         cx.save();
-        cx.globalAlpha = glow * 0.5;
-        cx.fillStyle = '#FFD700';
+        cx.globalAlpha = pulse;
+        // pequeno brilho dourado discreto no chão
+        cx.fillStyle = '#C8A800';
         cx.beginPath();
-        cx.ellipse(sx + c.w / 2, c.y + c.h / 2 + bob, 20, 22, 0, 0, Math.PI * 2);
+        cx.ellipse(sx + c.w / 2, c.y + c.h - 4, 8, 4, 0, 0, Math.PI * 2);
         cx.fill();
-        cx.globalAlpha = 1;
-        // corpo
-        cx.fillStyle = '#F5DEB3';
-        cx.fillRect(sx + 4, c.y + bob, c.w - 8, c.h - 4);
-        // cruz dourada
-        cx.fillStyle = '#B8860B';
-        cx.fillRect(sx + c.w / 2 - 2, c.y + 4 + bob, 4, c.h - 10);
-        cx.fillRect(sx + 6, c.y + 10 + bob, c.w - 12, 4);
-        // contorno brilhante
-        cx.strokeStyle = '#FFD700';
-        cx.lineWidth = 1.5;
-        cx.globalAlpha = glow;
-        cx.strokeRect(sx + 4, c.y + bob, c.w - 8, c.h - 4);
-        cx.globalAlpha = 1;
+        // objeto pequeno e sem destaque
+        cx.globalAlpha = pulse + 0.1;
+        cx.fillStyle = '#D4B870';
+        cx.fillRect(sx + 7, c.y + 8, c.w - 14, c.h - 14);
+        cx.fillStyle = '#8B6800';
+        cx.fillRect(sx + c.w / 2 - 1, c.y + 10, 2, c.h - 18);
+        cx.fillRect(sx + 9, c.y + 15, c.w - 18, 2);
         cx.restore();
-        // label
-        cx.fillStyle = '#FFD700';
-        cx.font = '9px Georgia';
-        cx.textAlign = 'center';
-        cx.fillText(c.part, sx + c.w / 2, c.y - 6 + bob);
       });
     }
 
