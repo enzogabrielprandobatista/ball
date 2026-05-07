@@ -150,8 +150,8 @@
         els.push({ x: rand(200, len), y: GY - 2, type: ['cactus', 'rock', 'bush'][si], sz: rand(14, 38) });
       }
       if (si === 2) {
-        for (let i = 0; i < 18; i++) {
-          els.push({ x: rand(200, len), y: GY - 2, type: 'cactus', sz: rand(18, 44) });
+        for (let i = 0; i < 12; i++) {
+          els.push({ x: 300 + (len / 12) * i + rand(80, 250), y: GY - 2, type: 'cactus', sz: rand(36, 70) });
         }
       }
       for (let i = 0; i < 12; i++) {
