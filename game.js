@@ -44,6 +44,7 @@
       { name: 'Etapa 1 — Praia de San Diego', sky: '#E8A040', gnd: '#B86A10', dust: '#D4884A', bossName: 'Mountain Tim', bossColor: '#8B4513', len: 5500 },
       { name: 'Etapa 2 — Rocky Mountains', sky: '#5A8AB0', gnd: '#3A5060', dust: '#708090', bossName: 'Ringo Roadagain', bossColor: '#2F4F4F', len: 7000 },
       { name: 'Etapa 3 — Palma do Diabo', sky: '#80C048', gnd: '#487828', dust: '#70A038', bossName: 'Hot Pants', bossColor: '#D44090', len: 8500 },
+      { name: 'Etapa 4 — Philadelphia', sky: '#1A3A8C', gnd: '#5A4A30', dust: '#9A7A50', bossName: 'Funny Valentine', bossColor: '#0A1A50', len: 11000 },
     ];
 
     // ── GLOBALS ────────────────────────────────────────────────────────────────
@@ -112,7 +113,7 @@
     function mkBgEls(si, len) {
       const els = [];
       for (let i = 0; i < 35; i++) {
-        els.push({ x: rand(200, len), y: GY - 2, type: ['cactus', 'rock', 'bush'][si], sz: rand(14, 38) });
+        els.push({ x: rand(200, len), y: GY - 2, type: ['cactus', 'rock', 'bush', 'tree'][si] || 'tree', sz: rand(14, 38) });
       }
       for (let i = 0; i < 12; i++) {
         els.push({ x: rand(0, len), y: rand(25, 100), type: 'cloud', sz: rand(40, 75), spd: rand(0.08, 0.25) });
@@ -474,6 +475,14 @@
           cx.beginPath(); cx.ellipse(sx, GY - e.sz * 0.28, e.sz * 0.65, e.sz * 0.36, 0, 0, Math.PI * 2); cx.fill();
           cx.fillStyle = '#9A9A9A';
           cx.beginPath(); cx.ellipse(sx - 4, GY - e.sz * 0.3, e.sz * 0.3, e.sz * 0.2, 0, 0, Math.PI * 2); cx.fill();
+        } else if (t === 'tree') {
+          cx.fillStyle = '#4A3020';
+          cx.fillRect(sx - 4, GY - e.sz, 8, e.sz);
+          cx.fillStyle = '#2A6818';
+          cx.beginPath(); cx.arc(sx, GY - e.sz - e.sz * 0.4, e.sz * 0.52, 0, Math.PI * 2); cx.fill();
+          cx.fillStyle = '#3A8828';
+          cx.beginPath(); cx.arc(sx - e.sz * 0.28, GY - e.sz - e.sz * 0.28, e.sz * 0.38, 0, Math.PI * 2); cx.fill();
+          cx.beginPath(); cx.arc(sx + e.sz * 0.28, GY - e.sz - e.sz * 0.28, e.sz * 0.38, 0, Math.PI * 2); cx.fill();
         } else {
           cx.fillStyle = '#3A7A18';
           cx.beginPath(); cx.arc(sx, GY - e.sz * 0.28, e.sz * 0.46, 0, Math.PI * 2); cx.fill();
@@ -1751,6 +1760,124 @@
         return;
       }
 
+      if (b.name === 'Funny Valentine') {
+        cx.save();
+        const x = sx, y = b.y, w = b.w, h = b.h;
+
+        // Shoes
+        cx.fillStyle = '#111';
+        cx.fillRect(x + 4, y + 64, 17, 8);
+        cx.fillRect(x + 27, y + 64, 17, 8);
+
+        // Legs — trousers navy
+        cx.fillStyle = '#0A1A50';
+        cx.fillRect(x + 8, y + 48, 14, 18);
+        cx.fillRect(x + 26, y + 48, 14, 18);
+        cx.fillStyle = '#102070';
+        cx.fillRect(x + 10, y + 50, 6, 14);
+        cx.fillRect(x + 28, y + 50, 6, 14);
+
+        // Suit torso
+        cx.fillStyle = '#0A1A50';
+        cx.fillRect(x + 4, y + 18, 40, 32);
+        // Quilt/cross pattern
+        cx.fillStyle = '#1A3A80';
+        [12, 20, 28, 36].forEach(ox => cx.fillRect(x + ox, y + 18, 2, 32));
+        [24, 30, 36, 42].forEach(oy => cx.fillRect(x + 4, y + oy, 40, 2));
+
+        // Gold buttons
+        cx.fillStyle = '#FFD700';
+        [26, 32, 38, 44].forEach(oy => { cx.beginPath(); cx.arc(x + 24, y + oy, 2, 0, Math.PI * 2); cx.fill(); });
+
+        // White shirt/collar
+        cx.fillStyle = '#F0F0F0';
+        cx.fillRect(x + 18, y + 18, 12, 10);
+        cx.fillStyle = '#CCCCCC';
+        cx.fillRect(x + 20, y + 20, 8, 6);
+
+        // Gold epaulettes (ombros dourados)
+        cx.fillStyle = '#C8900A';
+        cx.fillRect(x - 2, y + 18, 14, 5);
+        cx.fillRect(x + 36, y + 18, 14, 5);
+        cx.fillStyle = '#FFD700';
+        [0, 3, 6, 9, 12].forEach(ox => {
+          cx.fillRect(x - 2 + ox, y + 23, 2, 5);
+          cx.fillRect(x + 36 + ox, y + 23, 2, 5);
+        });
+
+        // Arms
+        cx.fillStyle = '#0A1A50';
+        cx.fillRect(x - 4, y + 20, 10, 28);
+        cx.fillRect(x + 42, y + 20, 10, 28);
+        // Hands
+        cx.fillStyle = '#FDBCB4';
+        cx.fillRect(x - 4, y + 46, 10, 8);
+        cx.fillRect(x + 42, y + 46, 10, 8);
+
+        // Cabelo loiro nas laterais
+        cx.fillStyle = '#E8C840';
+        cx.fillRect(x + 10, y + 2, 5, 15);
+        cx.fillRect(x + 33, y + 2, 5, 15);
+        cx.fillStyle = '#F0D860';
+        cx.fillRect(x + 11, y + 3, 3, 10);
+        cx.fillRect(x + 34, y + 3, 3, 10);
+
+        // Rosto
+        cx.fillStyle = '#FDBCB4';
+        cx.fillRect(x + 14, y + 2, 20, 17);
+        // Dois olhos
+        cx.fillStyle = '#1A1A3A';
+        cx.fillRect(x + 16, y + 7, 4, 3);
+        cx.fillRect(x + 28, y + 7, 4, 3);
+        cx.fillStyle = '#FFF';
+        cx.fillRect(x + 17, y + 8, 2, 1);
+        cx.fillRect(x + 29, y + 8, 2, 1);
+        // Sobrancelhas loiras sérias
+        cx.fillStyle = '#C8A020';
+        cx.fillRect(x + 15, y + 5, 6, 1);
+        cx.fillRect(x + 27, y + 5, 6, 1);
+        // Boca
+        cx.fillStyle = '#C07070';
+        cx.fillRect(x + 19, y + 14, 10, 2);
+
+        // Cartola — aba
+        cx.fillStyle = '#050D28';
+        cx.fillRect(x - 5, y - 2, 58, 5);
+        // Cartola — copo
+        cx.fillStyle = '#0A1A50';
+        cx.fillRect(x + 10, y - 22, 28, 22);
+        // Faixa da cartola dourada
+        cx.fillStyle = '#C8900A';
+        cx.fillRect(x + 10, y - 7, 28, 4);
+        cx.fillStyle = '#FFD700';
+        cx.fillRect(x + 12, y - 6, 24, 2);
+        // Estrelas na faixa
+        cx.fillStyle = '#FFF';
+        [14, 20, 26, 32].forEach(ox => cx.fillRect(x + ox, y - 6, 2, 2));
+        // Listras da bandeira americana na cartola
+        cx.fillStyle = 'rgba(200,20,20,0.5)';
+        [y - 20, y - 16, y - 12].forEach(hy => cx.fillRect(x + 10, hy, 28, 2));
+
+        // Fase 2 — aura patriótica vermelho/azul
+        if (b.phase === 2) {
+          const pulse = Math.sin(frame * 0.15);
+          cx.strokeStyle = `rgba(200,20,20,${0.4 + pulse * 0.2})`;
+          cx.lineWidth = 5;
+          cx.beginPath(); cx.arc(x + w / 2, y + h / 2, w * 0.9 + pulse * 6, 0, Math.PI * 2); cx.stroke();
+          cx.strokeStyle = `rgba(30,60,220,${0.35 + pulse * 0.15})`;
+          cx.lineWidth = 3;
+          cx.beginPath(); cx.arc(x + w / 2, y + h / 2, w * 1.15 + pulse * 8, 0, Math.PI * 2); cx.stroke();
+          cx.lineWidth = 1;
+        }
+
+        cx.restore();
+        cx.fillStyle = '#222'; cx.fillRect(hpX, hpY, hpW, 7);
+        cx.fillStyle = b.hp > b.maxHp * 0.5 ? '#00FF44' : '#FF3300';
+        cx.fillRect(hpX, hpY, hpW * (b.hp / b.maxHp), 7);
+        cx.strokeStyle = '#FFD700'; cx.strokeRect(hpX, hpY, hpW, 7);
+        return;
+      }
+
       // Generic boss (Mountain Tim, Ringo Roadagain)
       cx.fillStyle = b.color;
       cx.fillRect(sx, b.y, b.w, b.h);
@@ -2156,7 +2283,9 @@
             spawnEnemy();
             if (currentStage >= 2) { spawnEnemy(); }
             if (currentStage >= 2 && Math.random() < 0.35) { spawnEnemy(); }
-            spawnCd = currentStage >= 2 ? rInt(80, 150) : rInt(200, 340);
+            if (currentStage >= 3) { spawnEnemy(); }
+            if (currentStage >= 3 && Math.random() < 0.5) { spawnEnemy(); }
+            spawnCd = currentStage >= 3 ? rInt(55, 100) : currentStage >= 2 ? rInt(80, 150) : rInt(200, 340);
           }
         }
 
