@@ -1814,13 +1814,23 @@
         cx.fillRect(x - 4, y + 46, 10, 8);
         cx.fillRect(x + 42, y + 46, 10, 8);
 
-        // Cabelo loiro nas laterais
+        // Cabelo loiro — laterais e topo
         cx.fillStyle = '#E8C840';
         cx.fillRect(x + 10, y + 2, 5, 15);
         cx.fillRect(x + 33, y + 2, 5, 15);
+        // Topo da cabeça
+        cx.fillRect(x + 12, y - 10, 24, 14);
         cx.fillStyle = '#F0D860';
         cx.fillRect(x + 11, y + 3, 3, 10);
         cx.fillRect(x + 34, y + 3, 3, 10);
+        // Ondas no topo
+        cx.fillRect(x + 14, y - 12, 6, 4);
+        cx.fillRect(x + 22, y - 14, 6, 5);
+        cx.fillRect(x + 30, y - 11, 5, 3);
+        cx.fillStyle = '#FFEE70';
+        cx.fillRect(x + 15, y - 10, 4, 8);
+        cx.fillRect(x + 23, y - 12, 4, 9);
+        cx.fillRect(x + 31, y - 9, 3, 6);
 
         // Rosto
         cx.fillStyle = '#FDBCB4';
