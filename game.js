@@ -41,7 +41,7 @@
 
     // ── STAGES ─────────────────────────────────────────────────────────────────
     const STAGES = [
-      { name: 'Etapa 1 — Deserto do Mojave', sky: '#E8A040', gnd: '#B86A10', dust: '#D4884A', bossName: 'Mountain Tim', bossColor: '#8B4513', len: 5500 },
+      { name: 'Etapa 1 — Praia de San Diego', sky: '#E8A040', gnd: '#B86A10', dust: '#D4884A', bossName: 'Mountain Tim', bossColor: '#8B4513', len: 5500 },
       { name: 'Etapa 2 — Rocky Mountains', sky: '#5A8AB0', gnd: '#3A5060', dust: '#708090', bossName: 'Ringo Roadagain', bossColor: '#2F4F4F', len: 7000 },
       { name: 'Etapa 3 — Palma do Diabo', sky: '#80C048', gnd: '#487828', dust: '#70A038', bossName: 'Hot Pants', bossColor: '#D44090', len: 8500 },
     ];
