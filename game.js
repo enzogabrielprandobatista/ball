@@ -44,7 +44,7 @@
       { name: 'Etapa 1 — Praia de San Diego', sky: '#E8A040', gnd: '#B86A10', dust: '#D4884A', bossName: 'Mountain Tim', bossColor: '#8B4513', len: 5500 },
       { name: 'Etapa 2 — Rocky Mountains', sky: '#5A8AB0', gnd: '#3A5060', dust: '#708090', bossName: 'Ringo Roadagain', bossColor: '#2F4F4F', len: 7000 },
       { name: 'Etapa 3 — Palma do Diabo', sky: '#80C048', gnd: '#487828', dust: '#70A038', bossName: 'Hot Pants', bossColor: '#D44090', len: 8500 },
-      { name: 'Etapa 4 — Philadelphia', sky: '#1A3A8C', gnd: '#5A4A30', dust: '#9A7A50', bossName: 'Funny Valentine', bossColor: '#0A1A50', len: 11000 },
+      { name: 'Etapa 4 — Philadelphia', sky: '#1A3A8C', gnd: '#5A4A30', dust: '#9A7A50', bossName: 'Funny Valentine', bossColor: '#D44090', len: 11000 },
     ];
 
     // ── GLOBALS ────────────────────────────────────────────────────────────────
@@ -1769,19 +1769,19 @@
         cx.fillRect(x + 4, y + 64, 17, 8);
         cx.fillRect(x + 27, y + 64, 17, 8);
 
-        // Legs — trousers navy
-        cx.fillStyle = '#0A1A50';
+        // Legs — calças rosas
+        cx.fillStyle = '#D44090';
         cx.fillRect(x + 8, y + 48, 14, 18);
         cx.fillRect(x + 26, y + 48, 14, 18);
-        cx.fillStyle = '#102070';
+        cx.fillStyle = '#E870B0';
         cx.fillRect(x + 10, y + 50, 6, 14);
         cx.fillRect(x + 28, y + 50, 6, 14);
 
-        // Suit torso
-        cx.fillStyle = '#0A1A50';
+        // Suit torso rosa
+        cx.fillStyle = '#D44090';
         cx.fillRect(x + 4, y + 18, 40, 32);
-        // Quilt/cross pattern
-        cx.fillStyle = '#1A3A80';
+        // Quilt/cross pattern rosa mais claro
+        cx.fillStyle = '#E870B0';
         [12, 20, 28, 36].forEach(ox => cx.fillRect(x + ox, y + 18, 2, 32));
         [24, 30, 36, 42].forEach(oy => cx.fillRect(x + 4, y + oy, 40, 2));
 
@@ -1805,8 +1805,8 @@
           cx.fillRect(x + 36 + ox, y + 23, 2, 5);
         });
 
-        // Arms
-        cx.fillStyle = '#0A1A50';
+        // Arms rosas
+        cx.fillStyle = '#D44090';
         cx.fillRect(x - 4, y + 20, 10, 28);
         cx.fillRect(x + 42, y + 20, 10, 28);
         // Hands
@@ -1840,23 +1840,6 @@
         cx.fillStyle = '#C07070';
         cx.fillRect(x + 19, y + 14, 10, 2);
 
-        // Cartola — aba
-        cx.fillStyle = '#050D28';
-        cx.fillRect(x - 5, y - 2, 58, 5);
-        // Cartola — copo
-        cx.fillStyle = '#0A1A50';
-        cx.fillRect(x + 10, y - 22, 28, 22);
-        // Faixa da cartola dourada
-        cx.fillStyle = '#C8900A';
-        cx.fillRect(x + 10, y - 7, 28, 4);
-        cx.fillStyle = '#FFD700';
-        cx.fillRect(x + 12, y - 6, 24, 2);
-        // Estrelas na faixa
-        cx.fillStyle = '#FFF';
-        [14, 20, 26, 32].forEach(ox => cx.fillRect(x + ox, y - 6, 2, 2));
-        // Listras da bandeira americana na cartola
-        cx.fillStyle = 'rgba(200,20,20,0.5)';
-        [y - 20, y - 16, y - 12].forEach(hy => cx.fillRect(x + 10, hy, 28, 2));
 
         // Fase 2 — aura patriótica vermelho/azul
         if (b.phase === 2) {
