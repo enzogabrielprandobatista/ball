@@ -1693,16 +1693,28 @@
         cx.fillStyle = '#CCCCCC';
         cx.fillRect(x + 14, y + 19, 20, 2);
 
+        // Hair — rosa nas laterais do capacete
+        cx.fillStyle = '#E890C8';
+        cx.fillRect(x + 10, y + 4, 5, 14);
+        cx.fillRect(x + 33, y + 4, 5, 14);
+        cx.fillStyle = '#F0A8D8';
+        cx.fillRect(x + 11, y + 5, 3, 10);
+        cx.fillRect(x + 34, y + 5, 3, 10);
+
         // Face
         cx.fillStyle = '#FDBCB4';
         cx.fillRect(x + 14, y + 4, 20, 13);
-        const eyeOff = b.facing > 0 ? 9 : 2;
+        // Dois olhos
         cx.fillStyle = '#1A0A0A';
-        cx.fillRect(x + 14 + eyeOff, y + 8, 4, 3);
+        cx.fillRect(x + 16, y + 8, 4, 3);
+        cx.fillRect(x + 26, y + 8, 4, 3);
         cx.fillStyle = '#FFF';
-        cx.fillRect(x + 15 + eyeOff, y + 9, 2, 1);
+        cx.fillRect(x + 17, y + 9, 2, 1);
+        cx.fillRect(x + 27, y + 9, 2, 1);
+        // Sobrancelhas (expressão séria)
         cx.fillStyle = '#5A3A2A';
-        cx.fillRect(x + 13 + eyeOff, y + 6, 7, 1);
+        cx.fillRect(x + 15, y + 6, 6, 1);
+        cx.fillRect(x + 25, y + 6, 6, 1);
 
         // Helmet dark base
         cx.fillStyle = '#1A1A1A';
