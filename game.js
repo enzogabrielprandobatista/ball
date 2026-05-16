@@ -43,7 +43,7 @@
     const STAGES = [
       { name: 'Etapa 1 — Deserto do Mojave', sky: '#E8A040', gnd: '#B86A10', dust: '#D4884A', bossName: 'Mountain Tim', bossColor: '#8B4513', len: 5500 },
       { name: 'Etapa 2 — Rocky Mountains', sky: '#5A8AB0', gnd: '#3A5060', dust: '#708090', bossName: 'Ringo Roadagain', bossColor: '#2F4F4F', len: 7000 },
-      { name: 'Etapa 3 — Palma do Diabo', sky: '#80C048', gnd: '#487828', dust: '#70A038', bossName: 'Sandman', bossColor: '#DEB887', len: 8500 },
+      { name: 'Etapa 3 — Palma do Diabo', sky: '#80C048', gnd: '#487828', dust: '#70A038', bossName: 'Hot Pants', bossColor: '#D44090', len: 8500 },
     ];
 
     // ── GLOBALS ────────────────────────────────────────────────────────────────
@@ -1612,40 +1612,160 @@
 
     function drawBossEntity(b) {
       const sx = b.x - camX;
-      // Body (bigger)
+      const hpW = b.w + 14, hpX = sx - 7, hpY = b.y - 15;
+
+      if (b.name === 'Hot Pants') {
+        cx.save();
+        const x = sx, y = b.y, w = b.w, h = b.h;
+
+        // Legs — white bandages
+        cx.fillStyle = '#DCDCDC';
+        cx.fillRect(x + 8, y + 50, 13, 18);
+        cx.fillRect(x + 27, y + 50, 13, 18);
+        cx.fillStyle = '#B8B8B8';
+        [53, 57, 61].forEach(ly => {
+          cx.fillRect(x + 8, y + ly, 13, 1);
+          cx.fillRect(x + 27, y + ly, 13, 1);
+        });
+        // Pink boots
+        cx.fillStyle = '#C83880';
+        cx.fillRect(x + 7, y + 64, 15, 8);
+        cx.fillRect(x + 26, y + 64, 15, 8);
+
+        // Pink lower tunic (trapezoid)
+        cx.fillStyle = '#D44090';
+        cx.beginPath();
+        cx.moveTo(x + 6, y + 34); cx.lineTo(x + 42, y + 34);
+        cx.lineTo(x + 45, y + 52); cx.lineTo(x + 3, y + 52);
+        cx.closePath(); cx.fill();
+        cx.fillStyle = '#E870B0';
+        cx.fillRect(x + 10, y + 36, 10, 7);
+
+        // Arms — white bandages
+        cx.fillStyle = '#DCDCDC';
+        cx.fillRect(x - 2, y + 24, 10, 26);
+        cx.fillRect(x + 40, y + 24, 10, 26);
+        cx.fillStyle = '#B8B8B8';
+        [27, 31, 35, 39, 43].forEach(ly => {
+          cx.fillRect(x - 2, y + ly, 10, 1);
+          cx.fillRect(x + 40, y + ly, 10, 1);
+        });
+
+        // Torso plate armor
+        cx.fillStyle = '#D44090';
+        cx.fillRect(x + 8, y + 20, 32, 16);
+        cx.fillStyle = '#E870B0';
+        cx.fillRect(x + 10, y + 22, 14, 9);
+        cx.fillStyle = '#F090C8';
+        cx.fillRect(x + 11, y + 23, 7, 4);
+
+        // Shoulder pads
+        cx.fillStyle = '#C03080';
+        cx.fillRect(x - 2, y + 19, 12, 8);
+        cx.fillRect(x + 38, y + 19, 12, 8);
+
+        // Yellow bows
+        cx.fillStyle = '#FFD700';
+        cx.beginPath(); cx.moveTo(x + 2, y + 22); cx.lineTo(x - 5, y + 17); cx.lineTo(x + 2, y + 27); cx.closePath(); cx.fill();
+        cx.beginPath(); cx.moveTo(x + 2, y + 22); cx.lineTo(x + 9, y + 17); cx.lineTo(x + 2, y + 27); cx.closePath(); cx.fill();
+        cx.fillStyle = '#FFB800'; cx.beginPath(); cx.arc(x + 2, y + 22, 2, 0, Math.PI * 2); cx.fill();
+        cx.fillStyle = '#FFD700';
+        cx.beginPath(); cx.moveTo(x + 46, y + 22); cx.lineTo(x + 39, y + 17); cx.lineTo(x + 46, y + 27); cx.closePath(); cx.fill();
+        cx.beginPath(); cx.moveTo(x + 46, y + 22); cx.lineTo(x + 53, y + 17); cx.lineTo(x + 46, y + 27); cx.closePath(); cx.fill();
+        cx.fillStyle = '#FFB800'; cx.beginPath(); cx.arc(x + 46, y + 22, 2, 0, Math.PI * 2); cx.fill();
+
+        // Gold belt
+        cx.fillStyle = '#C8900A';
+        cx.fillRect(x + 6, y + 33, 36, 5);
+        cx.fillStyle = '#FFD700';
+        cx.fillRect(x + 8, y + 34, 32, 3);
+        // Belt buckle
+        cx.fillStyle = '#111';
+        cx.fillRect(x + 18, y + 31, 12, 8);
+        cx.fillStyle = '#FFD700';
+        cx.font = 'bold 5px sans-serif'; cx.textAlign = 'center';
+        cx.fillText('HE', x + 24, y + 37);
+        cx.textAlign = 'left';
+
+        // White scarf/neck wrap
+        cx.fillStyle = '#EEEEEE';
+        cx.fillRect(x + 14, y + 15, 20, 7);
+        cx.fillStyle = '#CCCCCC';
+        cx.fillRect(x + 14, y + 19, 20, 2);
+
+        // Face
+        cx.fillStyle = '#FDBCB4';
+        cx.fillRect(x + 14, y + 4, 20, 13);
+        const eyeOff = b.facing > 0 ? 9 : 2;
+        cx.fillStyle = '#1A0A0A';
+        cx.fillRect(x + 14 + eyeOff, y + 8, 4, 3);
+        cx.fillStyle = '#FFF';
+        cx.fillRect(x + 15 + eyeOff, y + 9, 2, 1);
+        cx.fillStyle = '#5A3A2A';
+        cx.fillRect(x + 13 + eyeOff, y + 6, 7, 1);
+
+        // Helmet dark base
+        cx.fillStyle = '#1A1A1A';
+        cx.fillRect(x + 12, y + 1, 24, 5);
+        // Gold dome
+        cx.fillStyle = '#C8900A';
+        cx.beginPath(); cx.ellipse(x + 24, y + 4, 14, 10, 0, Math.PI, Math.PI * 2); cx.fill();
+        cx.fillStyle = '#FFD700';
+        cx.beginPath(); cx.ellipse(x + 24, y + 3, 12, 8, 0, Math.PI, Math.PI * 2); cx.fill();
+        cx.fillStyle = '#FFEE88';
+        cx.beginPath(); cx.ellipse(x + 18, y + 1, 5, 3, -0.3, Math.PI, Math.PI * 2); cx.fill();
+        // Ball on top
+        cx.fillStyle = '#C8900A';
+        cx.beginPath(); cx.arc(x + 24, y - 6, 5, 0, Math.PI * 2); cx.fill();
+        cx.fillStyle = '#FFD700';
+        cx.beginPath(); cx.arc(x + 24, y - 7, 4, 0, Math.PI * 2); cx.fill();
+        cx.fillStyle = '#FFEE88';
+        cx.beginPath(); cx.arc(x + 22, y - 9, 1.5, 0, Math.PI * 2); cx.fill();
+
+        // Phase 2 — pink/magenta aura
+        if (b.phase === 2) {
+          cx.strokeStyle = `rgba(255,50,180,${0.35 + Math.sin(frame * 0.15) * 0.15})`;
+          cx.lineWidth = 5;
+          cx.beginPath(); cx.arc(x + w / 2, y + h / 2, w * 0.9 + Math.sin(frame * 0.15) * 6, 0, Math.PI * 2); cx.stroke();
+          cx.lineWidth = 1;
+        }
+
+        cx.restore();
+        // HP bar
+        cx.fillStyle = '#222'; cx.fillRect(hpX, hpY, hpW, 7);
+        cx.fillStyle = b.hp > b.maxHp * 0.5 ? '#00FF44' : '#FF3300';
+        cx.fillRect(hpX, hpY, hpW * (b.hp / b.maxHp), 7);
+        cx.strokeStyle = '#FFD700'; cx.strokeRect(hpX, hpY, hpW, 7);
+        return;
+      }
+
+      // Generic boss (Mountain Tim, Ringo Roadagain)
       cx.fillStyle = b.color;
       cx.fillRect(sx, b.y, b.w, b.h);
-      // Cape
       cx.fillStyle = 'rgba(0,0,0,0.35)';
       cx.fillRect(sx - 5, b.y + 10, b.w + 10, b.h - 10);
-      // Head
       cx.fillStyle = '#FDBCB4';
       cx.fillRect(sx + b.w * 0.18, b.y, b.w * 0.64, b.h * 0.28);
-      // Hat
       cx.fillStyle = '#1A0800';
       cx.fillRect(sx, b.y - 10, b.w, 6);
       cx.fillRect(sx + b.w * 0.15, b.y - 24, b.w * 0.7, 16);
       cx.fillStyle = '#8B3513';
       cx.fillRect(sx + b.w * 0.15, b.y - 12, b.w * 0.7, 4);
-      // Eye glow
       cx.fillStyle = '#FF4400';
       const bex = b.facing > 0 ? sx + b.w * 0.6 : sx + b.w * 0.2;
       cx.beginPath(); cx.arc(bex + 2, b.y + 7, 4, 0, Math.PI * 2); cx.fill();
       cx.fillStyle = '#FFD700';
       cx.beginPath(); cx.arc(bex + 2, b.y + 7, 2, 0, Math.PI * 2); cx.fill();
-      // Phase 2 aura
       if (b.phase === 2) {
         cx.strokeStyle = 'rgba(255,50,0,0.4)';
         cx.lineWidth = 4;
         cx.beginPath(); cx.arc(sx + b.w / 2, b.y + b.h / 2, b.w * 0.9 + Math.sin(frame * 0.15) * 6, 0, Math.PI * 2); cx.stroke();
         cx.lineWidth = 1;
       }
-      // HP bar
-      const bw = b.w + 14, bx2 = sx - 7, by2 = b.y - 15;
-      cx.fillStyle = '#222'; cx.fillRect(bx2, by2, bw, 7);
+      cx.fillStyle = '#222'; cx.fillRect(hpX, hpY, hpW, 7);
       cx.fillStyle = b.hp > b.maxHp * 0.5 ? '#00FF44' : '#FF3300';
-      cx.fillRect(bx2, by2, bw * (b.hp / b.maxHp), 7);
-      cx.strokeStyle = '#FFD700'; cx.strokeRect(bx2, by2, bw, 7);
+      cx.fillRect(hpX, hpY, hpW * (b.hp / b.maxHp), 7);
+      cx.strokeStyle = '#FFD700'; cx.strokeRect(hpX, hpY, hpW, 7);
     }
 
     function drawProjs() {
