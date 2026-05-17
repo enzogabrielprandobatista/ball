@@ -1764,77 +1764,84 @@
         cx.save();
         const x = sx, y = b.y, w = b.w, h = b.h;
 
-        // Shoes
-        cx.fillStyle = '#111';
-        cx.fillRect(x + 4, y + 64, 17, 8);
-        cx.fillRect(x + 27, y + 64, 17, 8);
+        // Botas rosas
+        cx.fillStyle = '#C83070';
+        cx.fillRect(x + 7, y + 63, 15, 9);
+        cx.fillRect(x + 26, y + 63, 15, 9);
+        cx.fillStyle = '#E05090';
+        cx.fillRect(x + 8, y + 64, 13, 6);
+        cx.fillRect(x + 27, y + 64, 13, 6);
 
-        // Legs — calças rosas
+        // Calças roxas visíveis abaixo do casaco
+        cx.fillStyle = '#7848A8';
+        cx.fillRect(x + 9, y + 50, 13, 16);
+        cx.fillRect(x + 26, y + 50, 13, 16);
+        cx.fillStyle = '#9060C0';
+        cx.fillRect(x + 11, y + 52, 6, 12);
+        cx.fillRect(x + 28, y + 52, 6, 12);
+
+        // Casaco longo rosa — borda inferior flare
+        cx.fillStyle = '#C83070';
+        cx.beginPath();
+        cx.moveTo(x + 2,  y + 48); cx.lineTo(x + 46, y + 48);
+        cx.lineTo(x + 50, y + 58); cx.lineTo(x - 2,  y + 58);
+        cx.closePath(); cx.fill();
+
+        // Casaco longo rosa — corpo
         cx.fillStyle = '#D44090';
-        cx.fillRect(x + 8, y + 48, 14, 18);
-        cx.fillRect(x + 26, y + 48, 14, 18);
+        cx.fillRect(x + 5, y + 18, 38, 34);
+        // Highlight lateral esquerdo
         cx.fillStyle = '#E870B0';
-        cx.fillRect(x + 10, y + 50, 6, 14);
-        cx.fillRect(x + 28, y + 50, 6, 14);
+        cx.fillRect(x + 7, y + 20, 13, 22);
+        cx.fillStyle = '#F090C8';
+        cx.fillRect(x + 8, y + 21, 6, 10);
 
-        // Suit torso rosa
-        cx.fillStyle = '#D44090';
-        cx.fillRect(x + 4, y + 18, 40, 32);
-        // Quilt/cross pattern rosa mais claro
-        cx.fillStyle = '#E870B0';
-        [12, 20, 28, 36].forEach(ox => cx.fillRect(x + ox, y + 18, 2, 32));
-        [24, 30, 36, 42].forEach(oy => cx.fillRect(x + 4, y + oy, 40, 2));
-
-        // Gold buttons
-        cx.fillStyle = '#FFD700';
-        [26, 32, 38, 44].forEach(oy => { cx.beginPath(); cx.arc(x + 24, y + oy, 2, 0, Math.PI * 2); cx.fill(); });
-
-        // White shirt/collar
-        cx.fillStyle = '#F0F0F0';
-        cx.fillRect(x + 18, y + 18, 12, 10);
-        cx.fillStyle = '#CCCCCC';
-        cx.fillRect(x + 20, y + 20, 8, 6);
-
-        // Gold epaulettes (ombros dourados)
-        cx.fillStyle = '#C8900A';
-        cx.fillRect(x - 2, y + 18, 14, 5);
-        cx.fillRect(x + 36, y + 18, 14, 5);
-        cx.fillStyle = '#FFD700';
-        [0, 3, 6, 9, 12].forEach(ox => {
-          cx.fillRect(x - 2 + ox, y + 23, 2, 5);
-          cx.fillRect(x + 36 + ox, y + 23, 2, 5);
-        });
-
-        // Arms rosas
-        cx.fillStyle = '#D44090';
-        cx.fillRect(x - 4, y + 20, 10, 28);
-        cx.fillRect(x + 42, y + 20, 10, 28);
-        // Hands
+        // V-neck (abertura do casaco)
         cx.fillStyle = '#FDBCB4';
-        cx.fillRect(x - 4, y + 46, 10, 8);
-        cx.fillRect(x + 42, y + 46, 10, 8);
+        cx.beginPath();
+        cx.moveTo(x + 20, y + 18); cx.lineTo(x + 28, y + 18);
+        cx.lineTo(x + 26, y + 32); cx.lineTo(x + 24, y + 36);
+        cx.lineTo(x + 22, y + 32);
+        cx.closePath(); cx.fill();
 
-        // Cabelo loiro — laterais e topo
+        // Mangas do casaco
+        cx.fillStyle = '#D44090';
+        cx.fillRect(x - 5, y + 18, 12, 26);
+        cx.fillRect(x + 41, y + 18, 12, 26);
+
+        // Luvas escuras
+        cx.fillStyle = '#2A2A2A';
+        cx.fillRect(x - 6, y + 42, 13, 14);
+        cx.fillRect(x + 41, y + 42, 13, 14);
+        cx.fillStyle = '#444';
+        cx.fillRect(x - 4, y + 44, 5, 10);
+        cx.fillRect(x + 43, y + 44, 5, 10);
+
+        // Cabelo longo loiro — laterais descendo
         cx.fillStyle = '#E8C840';
-        cx.fillRect(x + 10, y + 2, 5, 15);
-        cx.fillRect(x + 33, y + 2, 5, 15);
-        // Topo da cabeça
-        cx.fillRect(x + 12, y - 10, 24, 14);
+        cx.fillRect(x + 5,  y + 4,  9, 32);
+        cx.fillRect(x + 34, y + 4,  9, 32);
         cx.fillStyle = '#F0D860';
-        cx.fillRect(x + 11, y + 3, 3, 10);
-        cx.fillRect(x + 34, y + 3, 3, 10);
-        // Ondas no topo
-        cx.fillRect(x + 14, y - 12, 6, 4);
-        cx.fillRect(x + 22, y - 14, 6, 5);
-        cx.fillRect(x + 30, y - 11, 5, 3);
+        cx.fillRect(x + 6,  y + 6,  6, 26);
+        cx.fillRect(x + 36, y + 6,  6, 26);
+
+        // Cabelo no topo — ondulado
+        cx.fillStyle = '#E8C840';
+        cx.fillRect(x + 11, y - 12, 26, 16);
+        cx.fillRect(x + 13, y - 16, 6,  6);
+        cx.fillRect(x + 21, y - 18, 7,  7);
+        cx.fillRect(x + 30, y - 15, 5,  5);
+        cx.fillStyle = '#F0D860';
+        cx.fillRect(x + 14, y - 10, 4, 10);
+        cx.fillRect(x + 22, y - 12, 5, 12);
+        cx.fillRect(x + 31, y - 9,  3,  7);
         cx.fillStyle = '#FFEE70';
-        cx.fillRect(x + 15, y - 10, 4, 8);
-        cx.fillRect(x + 23, y - 12, 4, 9);
-        cx.fillRect(x + 31, y - 9, 3, 6);
+        cx.fillRect(x + 15, y - 8,  3,  6);
+        cx.fillRect(x + 23, y - 10, 3,  7);
 
         // Rosto
         cx.fillStyle = '#FDBCB4';
-        cx.fillRect(x + 14, y + 2, 20, 17);
+        cx.fillRect(x + 14, y + 2, 20, 16);
         // Dois olhos
         cx.fillStyle = '#1A1A3A';
         cx.fillRect(x + 16, y + 7, 4, 3);
@@ -1842,7 +1849,7 @@
         cx.fillStyle = '#FFF';
         cx.fillRect(x + 17, y + 8, 2, 1);
         cx.fillRect(x + 29, y + 8, 2, 1);
-        // Sobrancelhas loiras sérias
+        // Sobrancelhas loiras
         cx.fillStyle = '#C8A020';
         cx.fillRect(x + 15, y + 5, 6, 1);
         cx.fillRect(x + 27, y + 5, 6, 1);
@@ -1850,14 +1857,13 @@
         cx.fillStyle = '#C07070';
         cx.fillRect(x + 19, y + 14, 10, 2);
 
-
-        // Fase 2 — aura patriótica vermelho/azul
+        // Fase 2 — aura rosa/roxa
         if (b.phase === 2) {
           const pulse = Math.sin(frame * 0.15);
-          cx.strokeStyle = `rgba(200,20,20,${0.4 + pulse * 0.2})`;
+          cx.strokeStyle = `rgba(210,50,170,${0.4 + pulse * 0.2})`;
           cx.lineWidth = 5;
           cx.beginPath(); cx.arc(x + w / 2, y + h / 2, w * 0.9 + pulse * 6, 0, Math.PI * 2); cx.stroke();
-          cx.strokeStyle = `rgba(30,60,220,${0.35 + pulse * 0.15})`;
+          cx.strokeStyle = `rgba(130,40,200,${0.3 + pulse * 0.15})`;
           cx.lineWidth = 3;
           cx.beginPath(); cx.arc(x + w / 2, y + h / 2, w * 1.15 + pulse * 8, 0, Math.PI * 2); cx.stroke();
           cx.lineWidth = 1;
