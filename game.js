@@ -1825,19 +1825,17 @@
         cx.fillRect(x + 6,  y + 6,  6, 26);
         cx.fillRect(x + 36, y + 6,  6, 26);
 
-        // Cabelo no topo — ondulado
+        // Cabelo no topo — menor
         cx.fillStyle = '#E8C840';
-        cx.fillRect(x + 11, y - 12, 26, 16);
-        cx.fillRect(x + 13, y - 16, 6,  6);
-        cx.fillRect(x + 21, y - 18, 7,  7);
-        cx.fillRect(x + 30, y - 15, 5,  5);
+        cx.fillRect(x + 12, y - 4, 24, 8);
+        cx.fillRect(x + 15, y - 6, 6, 3);
+        cx.fillRect(x + 24, y - 7, 6, 4);
         cx.fillStyle = '#F0D860';
-        cx.fillRect(x + 14, y - 10, 4, 10);
-        cx.fillRect(x + 22, y - 12, 5, 12);
-        cx.fillRect(x + 31, y - 9,  3,  7);
+        cx.fillRect(x + 16, y - 3, 4, 6);
+        cx.fillRect(x + 25, y - 4, 4, 7);
         cx.fillStyle = '#FFEE70';
-        cx.fillRect(x + 15, y - 8,  3,  6);
-        cx.fillRect(x + 23, y - 10, 3,  7);
+        cx.fillRect(x + 17, y - 2, 2, 4);
+        cx.fillRect(x + 26, y - 3, 2, 4);
 
         // Rosto
         cx.fillStyle = '#FDBCB4';
